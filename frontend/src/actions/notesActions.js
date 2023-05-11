@@ -65,7 +65,7 @@ export const createNoteAction = (title, content, category) => async (dispatch, g
         }
 
         const { data } = await axios.post(
-            '/api/notes/create',
+            'http://localhost:5000/api/notes/create',
             { title, content, category },
             config
         )
@@ -103,7 +103,7 @@ export const deleteNoteAction = (id) => async (dispatch, getState) => {
             }
         }
 
-        const { data } = await axios.get(`/api/notes/${id}`, config)
+        const { data } = await axios.get(`http://localhost:5000/api/notes/${id}`, config)
 
         dispatch({
             type: NOTES_DELETE_SUCCESS,
@@ -137,7 +137,7 @@ export const updateNoteAction = (id, title, content, category) => async (dispatc
             }
         }
 
-        const { data } = await axios.put(`/api/notes/${id}`, { title, content, category }, config)
+        const { data } = await axios.put(`http://localhost:5000/api/notes/${id}`, { title, content, category }, config)
         dispatch({
             type: NOTES_UPDATE_SUCCESS,
             payload: data,

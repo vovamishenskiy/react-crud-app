@@ -1,10 +1,9 @@
-import mongoose from "mongoose"
 import dotenv from "dotenv"
-import users from "./data/users"
-import notes from "./data/notes"
-import User from "./models/userModel"
-import Note from "./models/noteModel"
-import connectDB from "./config/db"
+import users from "./data/users.js"
+import notes from "./data/notes.js"
+import User from "./models/userModel.js"
+import Note from "./models/noteModel.js"
+import connectDB from "./config/db.js"
 
 dotenv.config()
 

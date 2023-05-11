@@ -1,5 +1,5 @@
 import mongoose from "mongoose"
-import bcrypt from "bcryptjs"
+import bcrypt from "bcrypt"
 
 const userSchema = mongoose.Schema({
     name: {
@@ -29,12 +29,12 @@ userSchema.methods.matchPassword = async function (enteredPassword) {
 }
 
 userSchema.pre("save", async function (next) {
-    if(!this.isModified("password")) next()
+    if (!this.isModified("password")) next()
 
-    const salt = await bcrypt.getSalt(10)
+    const salt = await bcrypt.genSaltSync(10)
     this.password = await bcrypt.hash(this.password, salt)
 })
 
-const User = mongoose.model("User", userSchema)
+const User = mongoose.model('User', userSchema)
 
 export default User

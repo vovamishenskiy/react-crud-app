@@ -1,19 +1,20 @@
-import { express } from "express"
-import { dotenv } from "dotenv"
-import connectDB from "./config/db"
-import path from "path"
+import express from "express"
+// import config from "dotenv"
+import cors from "cors"
+import connectDB from "./config/db.js"
 import noteRoutes from "./routes/noteRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import { errorHandler, notFound } from "./middleware/errorMiddleware.js";
 
-dotenv.config()
+// dotenv.config()
 
 connectDB()
 
 const app = express()
+app.use(cors())
 app.use(express.json())
-app.use("/api/notes", noteRoutes);
-app.use("/api/users", userRoutes);
+app.use("/api/notes/", noteRoutes);
+app.use("/api/users/", userRoutes);
 
 app.get("/", (req, res) => {
     res.send("api is running")

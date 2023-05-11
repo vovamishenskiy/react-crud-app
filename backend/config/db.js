@@ -2,7 +2,7 @@ import mongoose from "mongoose"
 
 const connectDB = async () => {
     try {
-        const conn = await mongoose.connect(`localhost:port`, {
+        const conn = await mongoose.connect('mongodb://127.0.0.1:27017/react-crud-app', {
             useUnifiedTopology: true,
             useNewUrlParser: true,
             useCreateIndex: true,
@@ -15,4 +15,4 @@ const connectDB = async () => {
     }
 }
 
-export default connectDB;
+export default connectDB

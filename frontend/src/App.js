@@ -1,6 +1,5 @@
 import "./App.css";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import Footer from "./components/Footer";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
 import LandingPage from "./screens/LandingPage/LandingPage";
 import MyNotes from "./screens/MyNotes/MyNotes";
@@ -18,15 +17,16 @@ function App() {
     <Router>
       <Header setSearch={(s) => setSearch(s)} />
       <main className="app">
-        <Route path="/" component={LandingPage} exact />
-        <Route path="/login" component={LoginScreen} />
-        <Route path="/register" component={RegisterScreen} />
-        <Route path="/mynotes" component={({ history }) => (<MyNotes search={search} history={history} />)} />
-        <Route path="/note/:id" component={SingleNote} />
-        <Route path="/createnote" component={CreateNote} />
-        <Route path="/profile" component={ProfileScreen} />
+        <Routes>
+          <Route path="/" element={<LandingPage />} exact />
+          <Route path="/login" element={<LoginScreen />} />
+          <Route path="/register" element={<RegisterScreen />} />
+          <Route path="/mynotes" element={({ history }) => (<MyNotes search={search} history={history} />)} />
+          <Route path="/note/:id" element={<SingleNote />} />
+          <Route path="/createnote" element={<CreateNote />} />
+          <Route path="/profile" element={<ProfileScreen />} />
+        </Routes>
       </main>
-      <Footer />
     </Router>
   )
 }

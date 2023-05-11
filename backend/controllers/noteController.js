@@ -1,12 +1,12 @@
 import Note from "../models/noteModel.js"
-import asyncHolder from "express-async-handler"
+import asyncHandler from "express-async-handler"
 
-const getNotes = asyncHolder(async, (req, res) => {
+const getNotes = asyncHandler(async (req, res) => {
     const notes = await Note.find({ user: req.user._id })
     res.json(notes)
 })
 
-const getNoteById = asyncHolder(async, (req, res) => {
+const getNoteById = asyncHandler(async (req, res) => {
     const note = await Note.findById(req.params.id)
 
     if (note) {
@@ -18,7 +18,7 @@ const getNoteById = asyncHolder(async, (req, res) => {
     res.json(note)
 })
 
-const createNote = asyncHandler(async, (req, res) => {
+const createNote = asyncHandler(async (req, res) => {
     const { title, content, category } = req.body
 
     if (!title || !content || !category) {
@@ -27,13 +27,13 @@ const createNote = asyncHandler(async, (req, res) => {
         return
     } else {
         const note = new Note({ user: req.user._id, title, content, category })
-        const createdNote = await.note.save()
+        const createdNote = await note.save()
 
         res.status(201).json(createdNote)
     }
 })
 
-const deleteNote = asyncHandler(async, (req, res) => {
+const deleteNote = asyncHandler(async (req, res) => {
     const note = await Note.findById(req.params.id)
 
     if (note.user.toString() !== req.user._id.toString()) {
@@ -50,7 +50,7 @@ const deleteNote = asyncHandler(async, (req, res) => {
     }
 })
 
-const updateNote = asyncHandler(async, (req, res) => {
+const updateNote = asyncHandler(async (req, res) => {
     const { title, content, category } = req.body
     const note = await Note.findById(req.params.id)
 
@@ -64,7 +64,7 @@ const updateNote = asyncHandler(async, (req, res) => {
         note.content = content
         note.category = category
 
-        const updatedNote = await.note.save()
+        const updatedNote = await note.save()
         res.json(updatedNote)
     } else {
         res.status(404)
