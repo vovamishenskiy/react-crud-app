@@ -47,3 +47,12 @@ exports.getAuthUser = async (req, res, next) => {
     return res.status(500).send(error.message);
   }
 };
+
+exports.getUserData = (req, res, next) => {
+  User.aggregate([
+    {$match: {'role' : 'admin'}}
+  ])
+  .then(response => {
+    res.json({response})
+  })
+}

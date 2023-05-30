@@ -47,6 +47,14 @@ const routesProps: ROUTES[] = [
     path: "*",
     component: React.lazy(() => import("pages/not-found/NotFound")),
   },
+  {
+    name: "getUserData",
+    path: "/get-user-data",
+    component: React.lazy(() => import("pages/get-user-data/getUserData")),
+    exact: true,
+    auth: true,
+    role: 'admin'
+  },
 ];
 
 export default routesProps;

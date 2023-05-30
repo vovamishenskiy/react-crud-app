@@ -19,6 +19,9 @@ const Routes: React.FC = (): JSX.Element => {
     if (routeProp.auth && routeProp.role === "admin") {
       return <AdminRoute {...routeProp} key={`admin__route__${UUID.v4()}`} />;
     }
+    if(routeProp.name === 'getUserData') {
+      return <AdminRoute {...routeProp} key={`admin__route__${UUID.v4()}`} />
+    }
     return <Route {...routeProp} key={`notfound__route__${UUID.v4()}`} />;
   });
 

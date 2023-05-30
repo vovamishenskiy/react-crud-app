@@ -74,3 +74,10 @@ exports.getAuthAdmin = async (req, res, next) => {
     return res.status(500).send(error.message);
   }
 };
+
+exports.getUserData = (req, res, next) => {
+  const userData = User.aggregate([
+    {$match: {'role' : 'admin'}}
+  ]).exec();
+  res.status(200).send(userData)
+}

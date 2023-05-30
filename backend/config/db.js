@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const User = require("../models/User");
 
 module.exports = async (server) => {
   try {
@@ -17,3 +18,14 @@ module.exports = async (server) => {
     process.exit(1);
   }
 };
+
+const getUserData = async (response) => {
+  const res = await User.aggregate([
+    // { $match: { 'role': 'admin' } }
+    // { $match: { 'role': 'user' } }
+    // { $set: { 'test_role': 'tester' } }
+  ]).exec()
+  console.log('aggregate result: ', res)
+}
+
+getUserData()
