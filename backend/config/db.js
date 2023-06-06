@@ -3,13 +3,13 @@ const User = require("../models/User");
 
 module.exports = async (server) => {
   try {
-    await mongoose.connect(process.env.MONGO_URI);
+    await mongoose.connect('mongodb://127.0.0.1:27017/react-crud-app');
     console.log("mongo connection successful..");
 
     // Listening to server
-    await server.listen(process.env.PORT || 5000, () =>
+    await server.listen(5000, () =>
       console.log(
-        `server running on port ${process.env.PORT}..`
+        `server running on port 5000..`
       )
     );
   } catch (error) {
@@ -21,7 +21,7 @@ module.exports = async (server) => {
 
 const getUserData = async (response) => {
   const res = await User.aggregate([
-    // { $match: { 'role': 'admin' } }
+    { $match: { 'role': 'admin' } }
     // { $match: { 'role': 'user' } }
     // { $set: { 'test_role': 'tester' } }
   ]).exec()
